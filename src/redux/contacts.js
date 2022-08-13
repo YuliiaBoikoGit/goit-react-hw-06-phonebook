@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     items: JSON.parse(localStorage.getItem('contacts')) || [],
+    filter: '',
 };
 
 export const contactsSlice = createSlice({
@@ -14,9 +15,12 @@ export const contactsSlice = createSlice({
         deleteContact: (state, { payload: contactID }) => {
             state.items = state.items.filter(item => item.id !== contactID);
         },
+        setFilter: (state, action) => {
+            state.filter = action.payload;
+        },
     },
 });
 
-export const { setContacts, deleteContact } = contactsSlice.actions;
+export const { setContacts, deleteContact, setFilter } = contactsSlice.actions;
 
 export default contactsSlice.reducer;

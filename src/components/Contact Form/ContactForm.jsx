@@ -1,22 +1,21 @@
-import { setContacts } from "redux/contactList";
-import { setName, setNumber } from 'redux/contactForm';
-import { useEffect } from "react";
+import { setContacts } from "redux/contacts";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { nanoid } from "nanoid";
 import { Form, Input, Label, Button } from "./ContactForm.styled";
 
 export const ContactForm = () => {
-    const name = useSelector(state => state.contactForm.name);
-    const number = useSelector(state => state.contactForm.number);
+    const [name, setName] = useState('');
+    const [number, setNumber] = useState('');
     const contacts = useSelector(state => state.contacts.items);
     const dispatch = useDispatch();
 
-    const handleNameChange = event => dispatch(setName(event.target.value));
-    const handleNumberChange = event => dispatch(setNumber(event.target.value));
+    const handleNameChange = event => setName(event.target.value);
+    const handleNumberChange = event => setNumber(event.target.value);
 
     const reset = () => {
-        dispatch(setName(''));
-        dispatch(setNumber(''));
+        setName('');
+        setNumber('');
     };
 
     const formSubmitHandler = event => {
